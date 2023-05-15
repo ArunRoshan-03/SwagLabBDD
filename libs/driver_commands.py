@@ -16,7 +16,7 @@ class BasicActions:
         self.web_element = WebElement
         self.web_driver = web_driver
 
-    def click_by_xpath(self, locator):
+    def click_element(self, locator):
         try:
             self.web_element = self.web_driver.find_element(By.XPATH, locator)
         except NoSuchElementException:
@@ -69,7 +69,7 @@ class BasicActions:
             except Exception as error:
                 print(error)
 
-    def get_text_by_xpath(self, locator):
+    def get_text_element(self, locator):
         text = None
         try:
             self.web_element = self.web_driver.find_element(By.XPATH, locator)
@@ -103,7 +103,7 @@ class BasicActions:
         self.title = self.web_driver.title
         return self.title
 
-    def get_elements_text(self, locator):
+    def get_text_elements(self, locator):
         list_text = []
         web_elements = None
         try:

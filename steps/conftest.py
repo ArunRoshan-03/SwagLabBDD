@@ -1,6 +1,8 @@
 import pytest
 from pytest_bdd import when, given, then, parsers
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+
 from constants.constants import website_url
 from libs.login_page import Login_page
 
@@ -27,23 +29,3 @@ def login_homepage(browser):
 def login_credentials_label(browser):
     login_pages = Login_page(browser)
     login_pages.login_credentials_label()
-
-
-@when(parsers.parse("I fill the username <username> and password <password> on login page"))
-def username_textbox(browser, username, password):
-    login_pages = Login_page(browser)
-    login_pages.username_credentials(username)
-    login_pages.password_credentials(password)
-
-
-@when("click on the login Button")
-def login_button(browser):
-    login_pages = Login_page(browser)
-    login_pages.login_button()
-
-
-@then('I validate the home_page')
-def home_page(browser):
-    login_pages = Login_page(browser)
-    login_pages.swag_homepage()
-
