@@ -17,21 +17,44 @@ def login_button(browser):
     login_pages.login_button()
 
 
-@when('I navigate to home page')
-@then('I wil check that the product is visible on the product page.')
+@then('I navigate to product page')
+@when('I navigate to product page')
 def product_page(browser):
     product_pages = Product_Page(browser)
     product_pages.product_title()
 
 
-@when('I click the filter button and select "name (Z to A)".')
-def filter_button(browser):
-    product_pages = Product_Page(browser)
-    product_pages.click_filter_button()
-    product_pages.click_name_A_to_Z_button()
-
-
-@then('I validate the product list by clicking the filter button.')
+@then('I wil check that the product is visible on the product page.')
 def product_list(browser):
     product_pages = Product_Page(browser)
-    product_pages.verify_product_list()
+    product_pages.product_list()
+
+
+@when('I click on random product')
+def click_random_product(browser):
+    product_pages = Product_Page(browser)
+    product_pages.click_add_cart_label()
+
+
+@when('I processed to cart with random product')
+@then('I processed to cart with random product')
+def add_cart_verification(browser):
+    product_pages = Product_Page(browser)
+    product_pages.click_add_cart_button()
+    product_pages.click_check_out_button()
+    product_pages.information_detail()
+
+
+@then('I validate the product as successful ordered.')
+def product_ordered_verification(browser):
+    product_pages = Product_Page(browser)
+    product_pages.verify_checkout_overview()
+    product_pages.click_finish_button()
+    product_pages.verify_order_placed()
+
+
+@then('I validate the least product price on the product page')
+def verify_least_product_price(browser):
+    product_pages = Product_Page(browser)
+    product_pages.verify_product_price()
+

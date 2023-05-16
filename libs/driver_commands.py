@@ -1,3 +1,5 @@
+import random
+
 from selenium.common import NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
@@ -29,7 +31,7 @@ class BasicActions:
             except Exception as error:
                 print(error)
 
-    def type_by_xpath(self, locator, value):
+    def enter_text_field(self, locator, value):
         try:
             self.web_element = self.web_driver.find_element(By.XPATH, locator)
         except NoSuchElementException:
@@ -145,3 +147,19 @@ class BasicActions:
 
     def wait_element(self, wait_time):
         self.web_driver.implicitly_wait(wait_time)
+
+    def find_elements_to_click(self, locator, count):
+        web_elements = self.web_driver.find_elements(By.XPATH, locator)
+        random_products = random.sample(web_elements, count)
+        for product in random_products:
+            product.click()
+
+    def scroll_to_element_by_text(self, text_element):
+        element = self.web_driver.find_element(By.XPATH, f"//*[text()={text_element}]")
+        self.web_driver.execute_script("arguments[0].scrollIntoView(true);", element)
+
+    def click_add_cart_by_product_price(self, text):
+        element = self.web_driver.find_element(By.XPATH,
+                                               f"//div[text() = {text}]/following-sibling::button[@class='btn "
+                                               f"btn_primary btn_small btn_inventory']")
+        element.click()

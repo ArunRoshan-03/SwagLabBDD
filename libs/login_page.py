@@ -34,22 +34,22 @@ class Login_page(BasicActions):
     def username_credentials(self, username):
         self.wait_element(10)
         if username == "standard_user":
-            self.type_by_xpath(self.username_textbox_Xpath, username)
+            self.enter_text_field(self.username_textbox_Xpath, username)
         elif username == "locked_out_user":
             try:
-                self.type_by_xpath(self.username_textbox_Xpath, username)
+                self.enter_text_field(self.username_textbox_Xpath, username)
             except NoSuchElementException as noSuchElementException:
                 print(noSuchElementException)
             else:
                 login_error_message_text = self.get_text_element(self.error_message)
                 print(login_error_message_text)
         elif username == "problem_user":
-            self.type_by_xpath(self.username_textbox_Xpath, username)
+            self.enter_text_field(self.username_textbox_Xpath, username)
         elif username == "performance_glitch_user":
-            self.type_by_xpath(self.username_textbox_Xpath, username)
+            self.enter_text_field(self.username_textbox_Xpath, username)
 
     def password_credentials(self, password):
-        self.type_by_xpath(self.password_textbox_Xpath, password)
+        self.enter_text_field(self.password_textbox_Xpath, password)
 
     def login_button(self):
         self.wait_element(10)

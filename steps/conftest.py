@@ -12,7 +12,7 @@ def browser():
     driver = webdriver.Chrome()
     driver.get(website_url)
     driver.maximize_window()
-
+    
     yield driver
     driver.close()
 
