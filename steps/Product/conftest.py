@@ -19,9 +19,10 @@ def login_button(browser):
 
 @then('I navigate to product page')
 @when('I navigate to product page')
+@then('I validate the product page')
 def product_page(browser):
     product_pages = Product_Page(browser)
-    product_pages.product_title()
+    product_pages.product_page_title()
 
 
 @then('I wil check that the product is visible on the product page.')
@@ -33,14 +34,14 @@ def product_list(browser):
 @when('I click on random product')
 def click_random_product(browser):
     product_pages = Product_Page(browser)
-    product_pages.click_add_cart_label()
+    product_pages.click_add_cart_label(1)
 
 
 @when('I processed to cart with random product')
 @then('I processed to cart with random product')
+@when('I processed to cart with multiple products')
 def add_cart_verification(browser):
     product_pages = Product_Page(browser)
-    product_pages.click_add_cart_button()
     product_pages.click_check_out_button()
     product_pages.information_detail()
 
@@ -57,4 +58,24 @@ def product_ordered_verification(browser):
 def verify_least_product_price(browser):
     product_pages = Product_Page(browser)
     product_pages.verify_product_price()
+
+
+@when('I add multiple_items to cart')
+def add_multiple_cart(browser):
+    product_pages = Product_Page(browser)
+    product_pages.click_add_cart_label(2)
+
+
+@when('I navigate to the cart_page')
+@then('I navigate to the cart_page')
+def verify_cart_page(browser):
+    product_pages = Product_Page(browser)
+    product_pages.click_add_cart_button()
+    product_pages.verify_cart_page_title()
+
+
+@when('I click continue_shopping on the cart_page')
+def continue_shopping_verification(browser):
+    product_pages = Product_Page(browser)
+    product_pages.click_continue_shopping_button()
 

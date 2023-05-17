@@ -32,13 +32,15 @@ class Product_Page(BasicActions):
         self.order_placed_text_Xpath = "//h2[@class='complete-header'] | //div[@class='complete-text']"
         self.product_price_text_Xpath = "/html[1]/body[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div/div[" \
                                         "2]/div[2]/div[1]"
+        self.cart_page_title_Xpath = "//span[@class='title']"
+        self.continue_shopping_Button_Xpath = "//button[@id='continue-shopping']"
 
-
-    def product_title(self):
+    def product_page_title(self):
         self.wait_element(10)
         product_title_text = self.get_text_element(self.product_page_Xpath)
-        assert product_title_text in "Products"
-        print(product_title_text)
+        print("Product page title :", product_title_text)
+        self.verify_text(self.product_page_Xpath, "Products")
+
 
     def product_list(self):
         self.wait_element(10)
@@ -46,9 +48,9 @@ class Product_Page(BasicActions):
         print(self.product_list_name)
         return self.product_list_name
 
-    def click_add_cart_label(self):
+    def click_add_cart_label(self, count):
         self.wait_element(10)
-        self.find_elements_to_click(self.add_cart_label_Xpath, 2)
+        self.find_elements_to_random_click(self.add_cart_label_Xpath, count)
 
     def click_add_cart_button(self):
         self.wait_element(10)
@@ -60,6 +62,10 @@ class Product_Page(BasicActions):
         print(self.add_cart_product)
         return self.add_cart_product
 
+    def verify_cart_page_title(self):
+        self.wait_element(10)
+        self.get_text_elements(self.cart_page_title_Xpath)
+
     def click_check_out_button(self):
         self.wait_element(10)
         self.click_element(self.check_out_button_Xpath)
@@ -67,8 +73,14 @@ class Product_Page(BasicActions):
     def information_detail(self):
         self.wait_element(10)
         self.enter_text_field(self.first_name_textbox_Xpath, self.first_name)
+        self.verify_textbox(self.first_name_textbox_Xpath, self.first_name)
+
         self.enter_text_field(self.last_name_textbox_Xpath, self.last_name)
+        self.verify_textbox(self.last_name_textbox_Xpath, self.last_name)
+
         self.enter_text_field(self.pincode_textbox_Xpath, self.pin_code)
+        self.verify_textbox(self.pincode_textbox_Xpath, self.pin_code)
+
         self.wait_element(10)
         self.click_element(self.continue_button_Xpath)
 
@@ -92,3 +104,7 @@ class Product_Page(BasicActions):
         min_price = min(sorted_prices, key=float)
         self.scroll_to_element_by_text(min_price)
         self.click_add_cart_by_product_price(min_price)
+
+    def click_continue_shopping_button(self):
+        self.click_element(self.continue_shopping_Button_Xpath)
+

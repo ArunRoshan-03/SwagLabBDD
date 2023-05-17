@@ -1,11 +1,10 @@
 Feature: Swag lab login page
 
   Background:
-    Given user launch browser
-#    And user enters the swag labs url and is taken to the swag labs web page
+    Given user launch browser and user enter swag labs url
+    And I navigated to the swagLabs login_page is displayed
 
   Scenario: validate the login credentials on the login page
-    When The user should check their credentials on the login page.
     Then I validate login credentials on the login page
 
   Scenario Outline: validate the home page for different types of logged users
@@ -16,6 +15,6 @@ Feature: Swag lab login page
     Examples:
       | username                | password     |
       | standard_user           | secret_sauce |
-      | locked_out_user         | secret_sauce |
+      | problem_user         | secret_sauce |
       | performance_glitch_user | secret_sauce |
 

@@ -15,15 +15,15 @@ class Login_page(BasicActions):
         self.username_textbox_Xpath = "//input[@id='user-name']"
         self.password_textbox_Xpath = "//input[@id='password']"
         self.login_button_Xpath = "//input[@id='login-button']"
-        self.homepage_Xpath = "//span[@class='title']"
+        self.homepage_Xpath = "//div[@class='app_logo']"
         self.error_message = "//h3[@data-test='error']"
 
     def login_page(self):
         self.wait_element(12)
         self.element_is_displayed(self.login_page_text_Xpath)
-        # assert status is True
         page_title = self.get_text_element(self.login_page_text_Xpath)
-        print(page_title)
+        print("Login page title : ", page_title)
+        self.verify_text(self.login_page_text_Xpath, "Swag Labs")
 
     def login_credentials_label(self):
         self.wait_element(12)
@@ -59,4 +59,5 @@ class Login_page(BasicActions):
         self.wait_element(12)
         home_page_title_text = self.get_text_element(self.homepage_Xpath)
         print("Home page :", home_page_title_text)
+        self.verify_text(self.homepage_Xpath, "Swag Labs")
         self.element_is_displayed(self.homepage_Xpath)

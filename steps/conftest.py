@@ -10,17 +10,19 @@ from libs.login_page import Login_page
 @pytest.fixture()
 def browser():
     driver = webdriver.Chrome()
-    driver.get(website_url)
     driver.maximize_window()
-    
+
     yield driver
     driver.close()
 
 
-@given("user launch browser")
-@given("user enters the swag labs url and is taken to the swag labs web page")
-@when("The user should check their credentials on the login page.")
-def login_homepage(browser):
+@given("user launch browser and user enter swag labs url")
+def swag_labs_url(browser):
+    browser.get(website_url)
+
+
+@given("I navigated to the swagLabs login_page is displayed")
+def swagLabs_login_page(browser):
     login_pages = Login_page(browser)
     login_pages.login_page()
 

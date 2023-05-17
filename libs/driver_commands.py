@@ -148,7 +148,7 @@ class BasicActions:
     def wait_element(self, wait_time):
         self.web_driver.implicitly_wait(wait_time)
 
-    def find_elements_to_click(self, locator, count):
+    def find_elements_to_random_click(self, locator, count):
         web_elements = self.web_driver.find_elements(By.XPATH, locator)
         random_products = random.sample(web_elements, count)
         for product in random_products:
@@ -163,3 +163,15 @@ class BasicActions:
                                                f"//div[text() = {text}]/following-sibling::button[@class='btn "
                                                f"btn_primary btn_small btn_inventory']")
         element.click()
+
+    def verify_textbox(self, locator, expected_value):
+        first_name_element = self.web_driver.find_element(By.XPATH, locator)
+        entered_value = first_name_element.get_attribute("value")
+        assert entered_value == expected_value, f"Validation failed. Expected: {expected_value}, Actual: {entered_value}"
+        print(f"Expected: {entered_value} , Actual: {expected_value}")
+
+    def verify_text(self, locator, expected_value):
+        first_name_element = self.web_driver.find_element(By.XPATH, locator)
+        entered_value = first_name_element.text
+        assert entered_value == expected_value, f"Validation failed. Expected: {expected_value}, Actual: {entered_value}"
+        print(f"Expected: {entered_value} , Actual: {expected_value}")
