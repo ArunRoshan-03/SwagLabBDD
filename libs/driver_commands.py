@@ -18,6 +18,9 @@ class BasicActions:
         self.web_element = WebElement
         self.web_driver = web_driver
 
+    def find_elements(self, locator):
+        self.web_driver.find_elements(By.XPATH, locator)
+
     def click_element(self, locator):
         try:
             self.web_element = self.web_driver.find_element(By.XPATH, locator)
@@ -86,7 +89,7 @@ class BasicActions:
                 print(error)
         return text
 
-    def move_by_xpath(self, locator):
+    def scroll_element(self, locator):
 
         try:
             self.web_element = self.web_driver.find_element(By.XPATH, locator)
@@ -175,3 +178,33 @@ class BasicActions:
         entered_value = first_name_element.text
         assert entered_value == expected_value, f"Validation failed. Expected: {expected_value}, Actual: {entered_value}"
         print(f"Expected: {entered_value} , Actual: {expected_value}")
+
+    def remove_cart_button(self, locator, count):
+        list_text = []
+        web_elements = self.web_driver.find_elements(By.XPATH, locator)
+        if len(web_elements) > 1:
+            for web_element in web_elements:
+                self.web_element = web_element
+                self.text = self.web_element.text
+                list_text.append(self.text)
+
+            product_title = list_text[count]
+            updated_Xpath = self.web_driver.find_element(By.XPATH,
+                                                         f"//div[text() = '{product_title}']/parent::a/following"
+                                                         f"-sibling::div[2]/div/following-sibling::button")
+            updated_Xpath.click()
+            self.wait_element(10)
+            removed_element = self.web_driver.find_elements(By.XPATH,
+                                                            f"//div[text() = '{product_title}']/parent::a")
+            if not removed_element:
+                print(f"Your'{product_title}'product is removed from the Cart")
+            else:
+                print("Something went wrong. Product was not removed.")
+
+    def click_all_button(self, locator):
+        elements = self.web_driver.find_elements(By.XPATH, locator)
+        button_count = len(elements)
+        print("Number of buttons:", button_count)
+
+        for button in elements:
+            button.click()

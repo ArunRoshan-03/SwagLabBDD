@@ -79,3 +79,21 @@ def continue_shopping_verification(browser):
     product_pages = Product_Page(browser)
     product_pages.click_continue_shopping_button()
 
+
+@then('I validate particular item remove from cart')
+def verify_remove_product(browser):
+    product_pages = Product_Page(browser)
+    product_pages.click_remove_button()
+
+
+@when('I remove all items from cart')
+def remove_all_product(browser):
+    product_pages = Product_Page(browser)
+    product_pages.click_remove_button_all_items()
+
+
+@then('I validate the empty cart_page')
+def verify_empty_cart_page(browser):
+    product_pages = Product_Page(browser)
+    product_pages.verify_all_product_removed()
+

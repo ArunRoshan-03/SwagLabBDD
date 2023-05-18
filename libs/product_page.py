@@ -1,5 +1,7 @@
 import time
 from faker import Faker
+from selenium.common import NoSuchElementException
+
 from libs.driver_commands import BasicActions
 
 fake = Faker()
@@ -34,13 +36,13 @@ class Product_Page(BasicActions):
                                         "2]/div[2]/div[1]"
         self.cart_page_title_Xpath = "//span[@class='title']"
         self.continue_shopping_Button_Xpath = "//button[@id='continue-shopping']"
+        self.remove_button_Xpath = "//*[@class='btn btn_secondary btn_small cart_button']"
 
     def product_page_title(self):
         self.wait_element(10)
         product_title_text = self.get_text_element(self.product_page_Xpath)
         print("Product page title :", product_title_text)
         self.verify_text(self.product_page_Xpath, "Products")
-
 
     def product_list(self):
         self.wait_element(10)
@@ -59,7 +61,7 @@ class Product_Page(BasicActions):
         self.add_cart_product = self.get_text_elements(self.add_cart_product_text_Xpath)
         self.element_is_displayed(self.add_cart_product_text_Xpath)
         assert self.add_cart_product is not None
-        print(self.add_cart_product)
+        print("Total product", self.add_cart_product)
         return self.add_cart_product
 
     def verify_cart_page_title(self):
@@ -108,3 +110,20 @@ class Product_Page(BasicActions):
     def click_continue_shopping_button(self):
         self.click_element(self.continue_shopping_Button_Xpath)
 
+    def click_remove_button(self):
+        self.wait_element(10)
+        self.remove_cart_button(self.product_list_Xpath, 0)
+
+    def click_remove_button_all_items(self):
+        self.wait_element(10)
+        self.click_all_button(self.remove_button_Xpath)
+
+    def verify_all_product_removed(self):
+        try:
+            product_lists = self.find_elements(self.product_list_Xpath)
+            if not product_lists:
+                print("All your products have been removed from the cart")
+            else:
+                print("Something went wrong. Products were not removed.")
+        except NoSuchElementException:
+            print("Product list elements not found. Something went wrong.")

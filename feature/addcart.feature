@@ -67,3 +67,27 @@ Feature: Add cart page
     Examples:
       | username      | password     |
       | standard_user | secret_sauce |
+
+
+  Scenario Outline: Validate whether user is able to remove particular items from cart page
+    When I fill the username : <username>  and password : <password> on the login page
+    And I click login button on the loginpage
+    And I add multiple_items to cart
+    And I navigate to the cart_page
+    Then I validate particular item remove from cart
+
+    Examples:
+      | username      | password     |
+      | standard_user | secret_sauce |
+
+  Scenario Outline: Validate whether user is able to remove all items from cart page
+    When I fill the username : <username>  and password : <password> on the login page
+    And I click login button on the loginpage
+    And I add multiple_items to cart
+    And I navigate to the cart_page
+    And I remove all items from cart
+    Then I validate the empty cart_page
+
+    Examples:
+      | username      | password     |
+      | standard_user | secret_sauce |
