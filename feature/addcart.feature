@@ -91,3 +91,13 @@ Feature: Add cart page
     Examples:
       | username      | password     |
       | standard_user | secret_sauce |
+
+  Scenario Outline: Validate whether user is able to remove items from product page
+     When I fill the username : <username>  and password : <password> on the login page
+    And I click login button on the loginpage
+    And I add multiple_items to cart
+    Then I validate the remove items from product page
+
+    Examples:
+      | username      | password     |
+      | standard_user | secret_sauce |
