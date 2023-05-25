@@ -1,7 +1,6 @@
 import pytest
-from pytest_bdd import when, given, then, parsers
+from pytest_bdd import given, then
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 
 from constants.constants import website_url
 from libs.login_page import Login_page

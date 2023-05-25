@@ -32,8 +32,7 @@ class Product_Page(BasicActions):
                                            "1]/div[1]"
         self.finish_button_Xpath = "//button[@id='finish']"
         self.order_placed_text_Xpath = "//h2[@class='complete-header'] | //div[@class='complete-text']"
-        self.product_price_text_Xpath = "/html[1]/body[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div/div[" \
-                                        "2]/div[2]/div[1]"
+        self.product_price_text_Xpath = "//*[@class='pricebar']/child::*[@class='inventory_item_price']"
         self.cart_page_title_Xpath = "//span[@class='title']"
         self.continue_shopping_Button_Xpath = "//button[@id='continue-shopping']"
         self.remove_button_Xpath = "//*[@class='btn btn_secondary btn_small cart_button']"

@@ -4,9 +4,9 @@ from selenium.common import NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions
 
 
 class BasicActions:
@@ -170,13 +170,16 @@ class BasicActions:
     def verify_textbox(self, locator, expected_value):
         first_name_element = self.web_driver.find_element(By.XPATH, locator)
         entered_value = first_name_element.get_attribute("value")
-        assert entered_value == expected_value, f"Validation failed. Expected: {expected_value}, Actual: {entered_value}"
+        assert entered_value == expected_value,\
+            f"Validation failed. Expected: {expected_value}, Actual: {entered_value}"
+
         print(f"Expected: {entered_value} , Actual: {expected_value}")
 
     def verify_text(self, locator, expected_value):
         first_name_element = self.web_driver.find_element(By.XPATH, locator)
         entered_value = first_name_element.text
-        assert entered_value == expected_value, f"Validation failed. Expected: {expected_value}, Actual: {entered_value}"
+        assert entered_value == expected_value, \
+            f"Validation failed. Expected: {expected_value}, Actual: {entered_value}"
         print(f"Expected: {entered_value} , Actual: {expected_value}")
 
     def remove_cart_button(self, locator, count):

@@ -1,4 +1,4 @@
-from pytest_bdd import parsers, given, then, when
+from pytest_bdd import parsers, then, when
 
 from libs.login_page import Login_page
 from libs.product_page import Product_Page
@@ -96,4 +96,3 @@ def remove_all_product(browser):
 def verify_empty_cart_page(browser):
     product_pages = Product_Page(browser)
     product_pages.verify_all_product_removed()
-
